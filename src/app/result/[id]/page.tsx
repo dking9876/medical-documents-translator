@@ -97,6 +97,15 @@ export default function ResultPage({ params }: { params: Promise<{ id: string }>
           font-weight: 700;
           color: var(--text-primary);
         }
+        @media (max-width: 640px) {
+          .result-title {
+            font-size: 1.1rem;
+          }
+          .result-header {
+            flex-direction: column;
+            align-items: stretch;
+          }
+        }
       `}</style>
 
       {showSuccess && (

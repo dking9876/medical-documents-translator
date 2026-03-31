@@ -23,8 +23,7 @@ export function SideBySideView({ translation, fileUrl }: SideBySideViewProps) {
         .side-by-side-layout {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 1.5rem;
-          min-height: 700px;
+          gap: 1rem;
         }
 
         @media (min-width: 1024px) {
@@ -32,6 +31,7 @@ export function SideBySideView({ translation, fileUrl }: SideBySideViewProps) {
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
             height: calc(100vh - 180px);
+            min-height: 700px;
           }
         }
 
@@ -60,6 +60,13 @@ export function SideBySideView({ translation, fileUrl }: SideBySideViewProps) {
           font-size: 0.95rem;
         }
 
+        @media (max-width: 640px) {
+          .panel-header {
+            padding: 0.75rem 1rem;
+            font-size: 0.88rem;
+          }
+        }
+
         .panel-header.simplified-header {
           background: var(--primary);
           color: white;
@@ -73,7 +80,7 @@ export function SideBySideView({ translation, fileUrl }: SideBySideViewProps) {
         
         .panel-content {
           flex: 1;
-          overflow: hidden;
+          overflow-y: auto;
           background: var(--surface);
         }
         

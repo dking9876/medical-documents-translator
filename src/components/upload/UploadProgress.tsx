@@ -21,6 +21,12 @@ export function UploadProgress({ state }: { state: UploadState }) {
           padding: 2.5rem 2rem;
           animation: fadeSlideUp var(--transition-normal);
         }
+
+        @media (max-width: 640px) {
+          .progress-card {
+            padding: 2rem 1.25rem;
+          }
+        }
         
         .progress-stages {
           display: flex;
@@ -28,6 +34,7 @@ export function UploadProgress({ state }: { state: UploadState }) {
           gap: 0.5rem;
           margin-bottom: 2rem;
           direction: ltr;
+          flex-wrap: wrap;
         }
 
         .stage {
@@ -38,6 +45,15 @@ export function UploadProgress({ state }: { state: UploadState }) {
           font-weight: 500;
           color: var(--border-active);
           transition: color var(--transition-normal);
+        }
+
+        @media (max-width: 480px) {
+          .stage {
+            font-size: 0.78rem;
+          }
+          .stage-connector {
+            width: 12px !important;
+          }
         }
 
         .stage.active {

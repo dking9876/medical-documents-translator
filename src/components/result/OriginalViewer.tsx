@@ -108,6 +108,9 @@ export default function OriginalViewer({ url }: OriginalViewerProps) {
 
 function calculateWidth() {
   if (typeof window !== 'undefined') {
+    if (window.innerWidth < 1024) {
+      return Math.min(window.innerWidth - 80, 800);
+    }
     return Math.min(window.innerWidth / 2 - 100, 800);
   }
   return 600;

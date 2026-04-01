@@ -9,21 +9,37 @@ export function SimplifiedView({ content }: SimplifiedViewProps) {
     <div className="sv">
       <style>{`
         .sv {
-          padding: 2rem;
+          padding: 1.5rem;
           height: 100%;
           overflow-y: auto;
           background: var(--bg-color);
+          -webkit-overflow-scrolling: touch;
         }
 
+        @media (max-width: 640px) {
+          .sv {
+            padding: 1rem 0.875rem;
+          }
+        }
+
+        /* ── Summary Card ── */
         .sv-summary {
           background: linear-gradient(135deg, var(--primary) 0%, #172d4a 100%);
-          border-radius: var(--radius-xl);
-          padding: 2rem;
-          margin-bottom: 2.5rem;
+          border-radius: var(--radius-lg);
+          padding: 1.5rem;
+          margin-bottom: 1.75rem;
           color: white;
           box-shadow: var(--shadow-lg);
           position: relative;
           overflow: hidden;
+        }
+
+        @media (max-width: 640px) {
+          .sv-summary {
+            padding: 1.125rem 1rem;
+            margin-bottom: 1.25rem;
+            border-radius: var(--radius);
+          }
         }
 
         .sv-summary::after {
@@ -40,41 +56,66 @@ export function SimplifiedView({ content }: SimplifiedViewProps) {
 
         .sv-summary-title {
           font-family: var(--font-display), var(--font-heebo), serif;
-          font-size: 1.35rem;
+          font-size: 1.2rem;
           font-weight: 700;
-          margin-bottom: 1rem;
+          margin-bottom: 0.75rem;
           display: flex;
           align-items: center;
-          gap: 0.75rem;
+          gap: 0.6rem;
+        }
+
+        @media (max-width: 640px) {
+          .sv-summary-title {
+            font-size: 1.05rem;
+            gap: 0.5rem;
+          }
+          .sv-summary-title svg {
+            width: 20px;
+            height: 20px;
+          }
         }
 
         .sv-summary-type {
           display: inline-flex;
           align-items: center;
           background: rgba(255, 255, 255, 0.12);
-          padding: 0.35rem 0.85rem;
+          padding: 0.3rem 0.7rem;
           border-radius: var(--radius);
-          font-size: 0.8rem;
+          font-size: 0.75rem;
           font-weight: 600;
-          margin-bottom: 1rem;
+          margin-bottom: 0.75rem;
           letter-spacing: 0.02em;
           border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .sv-summary-text {
-          font-size: 1.15rem;
-          line-height: 1.75;
+          font-size: 1.05rem;
+          line-height: 1.7;
           opacity: 0.95;
-          max-width: 95%;
         }
 
+        @media (max-width: 640px) {
+          .sv-summary-text {
+            font-size: 0.95rem;
+            line-height: 1.65;
+          }
+        }
+
+        /* ── Section Cards ── */
         .sv-section {
-          margin-bottom: 2rem;
-          border-radius: var(--radius-xl);
+          margin-bottom: 1.25rem;
+          border-radius: var(--radius-lg);
           border: 1px solid var(--border-color);
           background: var(--surface);
           box-shadow: var(--shadow-sm);
-          transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+          transition: box-shadow var(--transition-normal);
+        }
+
+        @media (max-width: 640px) {
+          .sv-section {
+            margin-bottom: 1rem;
+            border-radius: var(--radius);
+          }
         }
 
         .sv-section:hover {
@@ -85,46 +126,73 @@ export function SimplifiedView({ content }: SimplifiedViewProps) {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 1.25rem 2rem;
+          padding: 1rem 1.25rem;
           background: var(--surface-warm);
           border-bottom: 1px solid var(--border-color);
-          border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+          border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+          gap: 0.5rem;
+        }
+
+        @media (max-width: 640px) {
+          .sv-section-header {
+            padding: 0.75rem 0.875rem;
+            border-radius: var(--radius) var(--radius) 0 0;
+            flex-wrap: wrap;
+          }
         }
 
         .sv-section-title {
           font-family: var(--font-display), var(--font-heebo), serif;
-          font-size: 1.2rem;
+          font-size: 1.1rem;
           font-weight: 700;
           color: var(--primary);
+          flex: 1;
+          min-width: 0;
         }
 
+        @media (max-width: 640px) {
+          .sv-section-title {
+            font-size: 0.95rem;
+          }
+        }
+
+        /* ── Badges ── */
         .sv-badge {
-          font-size: 0.75rem;
-          padding: 0.4rem 0.8rem;
+          font-size: 0.68rem;
+          padding: 0.3rem 0.65rem;
           border-radius: 200px;
           font-weight: 700;
           letter-spacing: 0.01em;
           text-transform: uppercase;
+          white-space: nowrap;
+          flex-shrink: 0;
         }
 
         .sv-badge-high { background: var(--success-light); color: var(--success); border: 1px solid rgba(29, 122, 95, 0.1); }
         .sv-badge-medium { background: var(--warning-light); color: var(--warning); border: 1px solid rgba(180, 83, 9, 0.1); }
         .sv-badge-low { background: var(--error-light); color: var(--error); border: 1px solid rgba(197, 48, 48, 0.1); }
 
+        /* ── Original Text Block ── */
         .sv-original {
-          padding: 1.75rem 2rem;
+          padding: 1.25rem;
           background: #fafafa;
           border-bottom: 1px dashed var(--border-color);
           position: relative;
         }
 
+        @media (max-width: 640px) {
+          .sv-original {
+            padding: 0.875rem;
+          }
+        }
+
         .sv-original-label {
-          font-size: 0.65rem;
+          font-size: 0.62rem;
           font-weight: 800;
           color: var(--text-secondary);
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          margin-bottom: 0.75rem;
+          margin-bottom: 0.6rem;
           display: flex;
           align-items: center;
           gap: 0.5rem;
@@ -139,43 +207,69 @@ export function SimplifiedView({ content }: SimplifiedViewProps) {
         }
 
         .sv-original-content {
-          font-size: 0.95rem;
-          line-height: 1.8;
+          font-size: 0.9rem;
+          line-height: 1.75;
           color: var(--text-secondary);
           font-family: inherit;
+          word-break: break-word;
+          overflow-wrap: anywhere;
         }
 
+        @media (max-width: 640px) {
+          .sv-original-content {
+            font-size: 0.85rem;
+            line-height: 1.65;
+          }
+        }
+
+        /* ── Explanation Block ── */
         .sv-explanation {
-          padding: 2rem;
+          padding: 1.25rem;
           background: var(--surface);
-          border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+          border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+        }
+
+        @media (max-width: 640px) {
+          .sv-explanation {
+            padding: 0.875rem;
+            border-radius: 0 0 var(--radius) var(--radius);
+          }
         }
 
         .sv-explanation-label {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
-          font-size: 0.75rem;
+          gap: 0.4rem;
+          font-size: 0.7rem;
           font-weight: 700;
           color: var(--accent);
-          margin-bottom: 0.75rem;
+          margin-bottom: 0.6rem;
           text-transform: uppercase;
           letter-spacing: 0.05em;
         }
 
         .sv-explanation-content {
-          font-size: 1.15rem;
-          line-height: 1.85;
+          font-size: 1.05rem;
+          line-height: 1.8;
           color: var(--text-primary);
           font-weight: 450;
+          word-break: break-word;
+          overflow-wrap: anywhere;
         }
 
-        /* Bidi Stability Fixes */
+        @media (max-width: 640px) {
+          .sv-explanation-content {
+            font-size: 0.95rem;
+            line-height: 1.7;
+          }
+        }
+
+        /* ── Bidi Stability ── */
         .bidi-text {
           unicode-bidi: isolate;
           text-align: right;
         }
-        
+
         .bidi-ltr-run {
           direction: ltr;
           unicode-bidi: isolate;
@@ -235,24 +329,20 @@ export function SimplifiedView({ content }: SimplifiedViewProps) {
 function BidiText({ text, isSimplified = false }: { text: string; isSimplified?: boolean }) {
   if (!text) return null;
 
-  // Split into lines first
   const lines = text.split('\n');
 
   return (
     <div className="bidi-text">
       {lines.map((line, i) => {
-        if (!line.trim() && line.length === 0) return <div key={i} style={{ height: '0.75rem' }} />;
-        
-        // Strategy: Recognize English-heavy runs that include brackets and numbers
-        // Regex handles: English words, numbers, brackets, and common medical symbols
+        if (!line.trim() && line.length === 0) return <div key={i} style={{ height: '0.5rem' }} />;
+
         const parts = line.split(/([a-zA-Z0-9\(\)\[\]\.\:\-\+ ]*[a-zA-Z]+[a-zA-Z0-9\(\)\[\]\.\:\-\+ ]*)/g);
-        
+
         return (
-          <div key={i} style={{ marginBottom: '0.2rem' }}>
+          <div key={i} style={{ marginBottom: '0.15rem' }}>
             {parts.map((part, pI) => {
               if (!part) return null;
-              
-              // If the part contains any English letters, wrap it as an LTR run
+
               if (/[a-zA-Z]/.test(part)) {
                 return (
                   <span key={pI} className="bidi-ltr-run" dir="ltr">
@@ -260,8 +350,7 @@ function BidiText({ text, isSimplified = false }: { text: string; isSimplified?:
                   </span>
                 );
               }
-              
-              // For Hebrew/numeric parts, keep them in the ambient RTL
+
               return <span key={pI}>{part}</span>;
             })}
           </div>

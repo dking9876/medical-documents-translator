@@ -60,7 +60,7 @@ export default function ResultPage({ params }: { params: Promise<{ id: string }>
   }
 
   return (
-    <div className="container" style={{ maxWidth: '1600px', paddingTop: '1.5rem' }}>
+    <div className="container" style={{ maxWidth: '1600px', paddingTop: '1rem' }}>
       <style>{`
         @keyframes successFadeIn {
           0% { opacity: 0; transform: translateY(-8px) scale(0.98); }
@@ -71,8 +71,8 @@ export default function ResultPage({ params }: { params: Promise<{ id: string }>
           background: var(--success-light);
           border: 1px solid var(--success);
           border-radius: var(--radius-lg);
-          padding: 1rem 1.5rem;
-          margin-bottom: 1.25rem;
+          padding: 0.75rem 1.25rem;
+          margin-bottom: 1rem;
           text-align: center;
           color: var(--success);
           font-weight: 600;
@@ -81,29 +81,42 @@ export default function ResultPage({ params }: { params: Promise<{ id: string }>
           justify-content: center;
           gap: 0.5rem;
           animation: successFadeIn 2.2s ease-out forwards;
-          font-size: 1.05rem;
+          font-size: 0.95rem;
+        }
+        @media (max-width: 640px) {
+          .success-banner {
+            padding: 0.625rem 1rem;
+            font-size: 0.85rem;
+            border-radius: var(--radius);
+          }
         }
         .result-header {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 1.25rem;
+          margin-bottom: 1rem;
           flex-wrap: wrap;
-          gap: 1rem;
+          gap: 0.75rem;
         }
         .result-title {
           font-family: var(--font-display), var(--font-heebo), serif;
-          font-size: 1.35rem;
+          font-size: 1.25rem;
           font-weight: 700;
           color: var(--text-primary);
+          word-break: break-word;
         }
         @media (max-width: 640px) {
           .result-title {
-            font-size: 1.1rem;
+            font-size: 1rem;
           }
           .result-header {
             flex-direction: column;
             align-items: stretch;
+            gap: 0.5rem;
+          }
+          .result-header .btn {
+            width: 100%;
+            justify-content: center;
           }
         }
       `}</style>

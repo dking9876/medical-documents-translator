@@ -314,6 +314,28 @@ export function DropZone() {
             align-items: center;
             justify-content: center;
           }
+
+          @media (max-width: 640px) {
+            .upload-icon-container {
+              width: 56px;
+              height: 56px;
+              margin-bottom: 1rem;
+            }
+            .upload-icon-container svg {
+              width: 36px;
+              height: 36px;
+            }
+            .upload-body {
+              padding: 1.5rem 1rem !important;
+            }
+            .upload-heading {
+              font-size: 1.1rem !important;
+            }
+            .upload-sub {
+              font-size: 0.82rem !important;
+              margin-bottom: 0 !important;
+            }
+          }
         `}</style>
 
         <div className="upload-body" style={{ flexDirection: 'column', textAlign: 'center', padding: '2rem 1.5rem' }}>

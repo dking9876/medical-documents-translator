@@ -10,7 +10,14 @@ export function Footer() {
           padding: 3rem 0;
           background: var(--bg-color);
           border-top: 1px solid var(--border-color);
-          margin-top: 4rem;
+          margin-top: 2rem;
+        }
+
+        @media (max-width: 640px) {
+          .footer-professional {
+            padding: 2rem 0;
+            margin-top: 1rem;
+          }
         }
 
         .footer-grid {
@@ -25,13 +32,14 @@ export function Footer() {
             grid-template-columns: 1fr;
             text-align: center;
             justify-items: center;
+            gap: 1.5rem;
           }
         }
 
         .footer-brand {
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 0.75rem;
         }
 
         .footer-logo {
@@ -44,15 +52,24 @@ export function Footer() {
           text-decoration: none;
         }
 
+        @media (max-width: 768px) {
+          .footer-logo {
+            justify-content: center;
+          }
+          .social-links {
+            justify-content: center;
+          }
+        }
+
         .social-links {
           display: flex;
-          gap: 1rem;
-          margin-top: 0.5rem;
+          gap: 0.75rem;
+          margin-top: 0.4rem;
         }
 
         .social-icon {
-          width: 32px;
-          height: 32px;
+          width: 36px;
+          height: 36px;
           border-radius: 50%;
           background: var(--primary-light);
           color: var(--primary);
@@ -70,7 +87,7 @@ export function Footer() {
 
         .footer-testimonial {
           background: white;
-          padding: 1.25rem;
+          padding: 1.125rem;
           border-radius: var(--radius-lg);
           border: 1px solid var(--border-color);
           max-width: 320px;
@@ -79,11 +96,18 @@ export function Footer() {
           position: relative;
         }
 
+        @media (max-width: 768px) {
+          .footer-testimonial {
+            max-width: 100%;
+            width: 100%;
+          }
+        }
+
         .testimonial-text {
-          font-size: 0.9rem;
+          font-size: 0.88rem;
           color: var(--text-secondary);
           line-height: 1.5;
-          margin-bottom: 0.75rem;
+          margin-bottom: 0.6rem;
           font-style: italic;
         }
 

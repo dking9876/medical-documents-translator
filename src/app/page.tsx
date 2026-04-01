@@ -47,6 +47,28 @@ export default function Home() {
                   height: auto;
                   object-fit: cover;
                 }
+                @media (max-width: 1024px) {
+                  .hero-visual {
+                    order: -1;
+                  }
+                  .hero-image-wrapper {
+                    max-height: 280px;
+                  }
+                  .hero-image {
+                    max-height: 280px;
+                    object-fit: cover;
+                    object-position: center 30%;
+                  }
+                }
+                @media (max-width: 640px) {
+                  .hero-image-wrapper {
+                    border-radius: var(--radius);
+                    max-height: 200px;
+                  }
+                  .hero-image {
+                    max-height: 200px;
+                  }
+                }
               `}</style>
             </div>
           </section>
@@ -76,7 +98,7 @@ export default function Home() {
             </div>
           </section>
 
-          <div className="animate-in animate-in-4" style={{ maxWidth: '100%', margin: '4rem 0' }}>
+          <div className="animate-in animate-in-4" style={{ maxWidth: '100%', margin: '2rem 0' }}>
             <Disclaimer />
           </div>
         </main>
@@ -88,14 +110,14 @@ export default function Home() {
 
 function TrustItem({ icon, label, desc, number }: { icon: React.ReactNode, label: string, desc: string, number: string }) {
   return (
-    <div className="trust-item" style={{ flex: '1', minWidth: '240px', textAlign: 'center', padding: '1.5rem' }}>
-      <div className="trust-icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '48px', height: '48px', margin: '0 auto 1rem', background: 'var(--success-teal-light)', color: 'var(--success-teal)', borderRadius: '50%' }}>
+    <div className="trust-item" style={{ flex: '1', minWidth: '200px', textAlign: 'center', padding: '1.25rem 1rem' }}>
+      <div className="trust-icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '48px', height: '48px', margin: '0 auto 0.75rem', background: 'var(--success-teal-light)', color: 'var(--success-teal)', borderRadius: '50%' }}>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           {icon}
         </svg>
       </div>
-      <h3 style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '0.5rem', color: 'var(--primary)' }}>{number}. {label}</h3>
-      <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{desc}</p>
+      <h3 style={{ fontSize: '1rem', fontWeight: '700', marginBottom: '0.4rem', color: 'var(--primary)' }}>{number}. {label}</h3>
+      <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{desc}</p>
     </div>
   );
 }

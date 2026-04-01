@@ -63,20 +63,11 @@ export function DropZone() {
           width: 100%;
         }
 
-        /* Card container — solid, no dashed border */
-        .upload-card {
-          background: var(--surface);
+        /* Card container — removed solid border to allow dashed-teal-box to shine */
+        .upload-card-base {
           border-radius: var(--radius-xl);
-          border: 1px solid var(--border-color);
-          box-shadow: var(--shadow-md);
           overflow: hidden;
-          transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
           position: relative;
-        }
-
-        .upload-card:hover {
-          box-shadow: var(--shadow-lg);
-          border-color: var(--border-active);
         }
 
         /* Drag overlay — appears on top when dragging */
@@ -300,73 +291,47 @@ export function DropZone() {
       `}</style>
 
       <div 
-        className="upload-card"
+        className={`upload-card-base dashed-teal-box ${isDragging ? 'is-dragging' : ''}`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
+        onClick={() => fileInputRef.current?.click()}
+        style={{ cursor: 'pointer', transition: 'all 0.2s ease', position: 'relative' }}
       >
-        {/* Drag overlay — only visible when dragging over */}
-        <div className={`drag-overlay ${isDragging ? 'visible' : ''}`}>
-          <div className="drag-overlay-text">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="17 8 12 3 7 8" />
-              <line x1="12" x2="12" y1="3" y2="15" />
+        <style>{`
+          .dashed-teal-box.is-dragging, .dashed-teal-box:hover {
+            background-color: rgba(16, 185, 129, 0.1);
+            border-color: #059669;
+            transform: scale(1.01);
+          }
+          
+          .upload-icon-container {
+            width: 72px;
+            height: 72px;
+            color: var(--success-teal);
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        `}</style>
+
+        <div className="upload-body" style={{ flexDirection: 'column', textAlign: 'center', padding: '2rem 1.5rem' }}>
+          <div className="upload-icon-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+              <polyline points="14 2 14 8 20 8" />
+              <path d="M12 18v-6" />
+              <path d="m9 15 3 3 3-3" />
             </svg>
-            שחררו כאן להעלאה
-          </div>
-        </div>
-
-        <div className="upload-body">
-          {/* Abstract document illustration */}
-          <div className="upload-visual">
-            <div className="upload-visual-accent">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-              </svg>
-            </div>
           </div>
 
-          {/* Content */}
           <div className="upload-content">
-            <h3 className="upload-heading">העלו מסמך רפואי</h3>
-            <p className="upload-sub">
-              בחרו קובץ PDF ונפשט אותו לשפה ברורה תוך שניות
+            <h3 className="upload-heading" style={{ fontSize: '1.4rem', color: 'var(--primary)', marginBottom: '0.5rem' }}>גרירת קובץ או לחיצה להעלאה</h3>
+            <p className="upload-sub" style={{ color: 'var(--text-secondary)' }}>
+              PDF בלבד. עד 10 עמודים. מוצפן ומאובטח.
             </p>
-            <div className="upload-actions">
-              <button 
-                className="upload-btn"
-                onClick={() => fileInputRef.current?.click()}
-                onKeyDown={handleKeyDown}
-                type="button"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="17 8 12 3 7 8" />
-                  <line x1="12" x2="12" y1="3" y2="15" />
-                </svg>
-                בחרו קובץ PDF
-              </button>
-              <span className="upload-drag-hint">או גררו לכאן</span>
-            </div>
           </div>
-        </div>
-
-        {/* Footer strip */}
-        <div className="upload-footer">
-          <span className="upload-footer-item">
-            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            PDF בלבד
-          </span>
-          <span className="upload-footer-item">
-            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            עד 10 עמודים
-          </span>
-          <span className="upload-footer-item">
-            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            מוצפן ומאובטח
-          </span>
         </div>
 
         <input 

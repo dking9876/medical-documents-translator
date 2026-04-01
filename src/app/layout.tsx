@@ -38,7 +38,7 @@ export default function RootLayout({
                 SimpleMed
               </Link>
               <nav className="flex items-center gap-4">
-                <Link href="/" className="btn btn-outline">
+                <Link href="/" className="btn btn-secondary">
                   מסמך חדש
                 </Link>
               </nav>

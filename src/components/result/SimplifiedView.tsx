@@ -9,168 +9,197 @@ export function SimplifiedView({ content }: SimplifiedViewProps) {
     <div className="sv">
       <style>{`
         .sv {
-          padding: 1.75rem;
+          padding: 2rem;
           height: 100%;
           overflow-y: auto;
+          background: var(--bg-color);
         }
 
         .sv-summary {
-          background: var(--primary);
-          border-radius: var(--radius-lg);
-          padding: 1.75rem 2rem;
-          margin-bottom: 2rem;
+          background: linear-gradient(135deg, var(--primary) 0%, #172d4a 100%);
+          border-radius: var(--radius-xl);
+          padding: 2rem;
+          margin-bottom: 2.5rem;
           color: white;
+          box-shadow: var(--shadow-lg);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .sv-summary::after {
+          content: '';
+          position: absolute;
+          top: -20%;
+          left: -10%;
+          width: 40%;
+          height: 140%;
+          background: linear-gradient(90deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+          transform: rotate(20deg);
+          pointer-events: none;
         }
 
         .sv-summary-title {
           font-family: var(--font-display), var(--font-heebo), serif;
-          font-size: 1.25rem;
+          font-size: 1.35rem;
           font-weight: 700;
-          margin-bottom: 0.75rem;
+          margin-bottom: 1rem;
           display: flex;
           align-items: center;
-          gap: 0.5rem;
-          opacity: 0.9;
+          gap: 0.75rem;
         }
 
         .sv-summary-type {
-          display: inline-block;
-          background: rgba(255, 255, 255, 0.15);
-          padding: 0.25rem 0.75rem;
-          border-radius: 100px;
-          font-size: 0.82rem;
+          display: inline-flex;
+          align-items: center;
+          background: rgba(255, 255, 255, 0.12);
+          padding: 0.35rem 0.85rem;
+          border-radius: var(--radius);
+          font-size: 0.8rem;
           font-weight: 600;
-          margin-bottom: 0.75rem;
+          margin-bottom: 1rem;
+          letter-spacing: 0.02em;
+          border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .sv-summary-text {
-          font-size: 1.05rem;
-          line-height: 1.8;
-          opacity: 0.92;
+          font-size: 1.15rem;
+          line-height: 1.75;
+          opacity: 0.95;
+          max-width: 95%;
         }
 
         .sv-section {
-          margin-bottom: 1.5rem;
-          border-radius: var(--radius-lg);
+          margin-bottom: 2rem;
+          border-radius: var(--radius-xl);
           border: 1px solid var(--border-color);
-          overflow: hidden;
           background: var(--surface);
+          box-shadow: var(--shadow-sm);
+          transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+        }
+
+        .sv-section:hover {
+          box-shadow: var(--shadow-md);
         }
 
         .sv-section-header {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 1.1rem 1.75rem;
+          padding: 1.25rem 2rem;
           background: var(--surface-warm);
           border-bottom: 1px solid var(--border-color);
-          gap: 0.75rem;
+          border-radius: var(--radius-xl) var(--radius-xl) 0 0;
         }
 
         .sv-section-title {
           font-family: var(--font-display), var(--font-heebo), serif;
-          font-size: 1.12rem;
+          font-size: 1.2rem;
           font-weight: 700;
           color: var(--primary);
-          line-height: 1.3;
         }
 
         .sv-badge {
-          font-size: 0.72rem;
-          padding: 0.3rem 0.6rem;
-          border-radius: 100px;
-          font-weight: 600;
-          white-space: nowrap;
-          flex-shrink: 0;
+          font-size: 0.75rem;
+          padding: 0.4rem 0.8rem;
+          border-radius: 200px;
+          font-weight: 700;
+          letter-spacing: 0.01em;
+          text-transform: uppercase;
         }
 
-        .sv-badge-high { background: var(--success-light); color: var(--success); }
-        .sv-badge-medium { background: var(--warning-light); color: var(--warning); }
-        .sv-badge-low { background: var(--error-light); color: var(--error); }
+        .sv-badge-high { background: var(--success-light); color: var(--success); border: 1px solid rgba(29, 122, 95, 0.1); }
+        .sv-badge-medium { background: var(--warning-light); color: var(--warning); border: 1px solid rgba(180, 83, 9, 0.1); }
+        .sv-badge-low { background: var(--error-light); color: var(--error); border: 1px solid rgba(197, 48, 48, 0.1); }
 
         .sv-original {
-          margin: 0;
-          padding: 1.5rem 1.75rem;
-          background: var(--bg-color);
-          border-bottom: 1px solid var(--border-color);
+          padding: 1.75rem 2rem;
+          background: #fafafa;
+          border-bottom: 1px dashed var(--border-color);
           position: relative;
         }
 
-        .sv-original::before {
-          content: '';
-          position: absolute;
-          top: 1rem;
-          bottom: 1rem;
-          right: 0;
-          width: 3px;
-          background: var(--primary);
-          border-radius: 0 2px 2px 0;
-          opacity: 0.25;
+        .sv-original-label {
+          font-size: 0.65rem;
+          font-weight: 800;
+          color: var(--text-secondary);
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          margin-bottom: 0.75rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
         }
 
-        .sv-original-label {
-          font-size: 0.7rem;
-          font-weight: 700;
-          color: var(--primary);
-          text-transform: uppercase;
-          letter-spacing: 0.06em;
-          margin-bottom: 0.6rem;
-          opacity: 0.6;
+        .sv-original-label::after {
+          content: '';
+          flex-grow: 1;
+          height: 1px;
+          background: var(--border-color);
+          opacity: 0.5;
         }
 
         .sv-original-content {
           font-size: 0.95rem;
           line-height: 1.8;
           color: var(--text-secondary);
-          white-space: pre-wrap;
+          font-family: inherit;
         }
 
         .sv-explanation {
-          padding: 1.5rem 1.75rem;
-          position: relative;
-        }
-
-        .sv-explanation::before {
-          content: '';
-          position: absolute;
-          top: 1rem;
-          bottom: 1rem;
-          right: 0;
-          width: 3px;
-          background: var(--accent);
-          border-radius: 0 2px 2px 0;
+          padding: 2rem;
+          background: var(--surface);
+          border-radius: 0 0 var(--radius-xl) var(--radius-xl);
         }
 
         .sv-explanation-label {
           display: flex;
           align-items: center;
-          gap: 0.4rem;
-          font-size: 0.78rem;
+          gap: 0.5rem;
+          font-size: 0.75rem;
           font-weight: 700;
           color: var(--accent);
-          margin-bottom: 0.6rem;
+          margin-bottom: 0.75rem;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
 
         .sv-explanation-content {
-          font-size: 1.08rem;
-          line-height: 1.9;
+          font-size: 1.15rem;
+          line-height: 1.85;
           color: var(--text-primary);
+          font-weight: 450;
+        }
+
+        /* Bidi Stability Fixes */
+        .bidi-text {
+          unicode-bidi: isolate;
+          text-align: right;
+        }
+        
+        .bidi-ltr-run {
+          direction: ltr;
+          unicode-bidi: isolate;
+          display: inline-block;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
       `}</style>
 
-      <div className="sv-summary">
+      <div className="sv-summary animate-in animate-in-1">
         <div className="sv-summary-title">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="20 6 9 17 4 12" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+            <polyline points="22 4 12 14.01 9 11.01" />
           </svg>
           תקציר המסמך
         </div>
-        <div className="sv-summary-type">סוג: {content.document_type}</div>
+        <div className="sv-summary-type">
+          {content.document_type}
+        </div>
         <p className="sv-summary-text">{content.summary}</p>
       </div>
 
       {content.sections.map((section, index) => (
-        <div key={index} className="sv-section">
+        <div key={index} className={`sv-section animate-in animate-in-${Math.min(index + 2, 5)}`}>
           <div className="sv-section-header">
             <span className="sv-section-title">{section.heading}</span>
             <span className={`sv-badge sv-badge-${section.confidence}`}>
@@ -188,15 +217,13 @@ export function SimplifiedView({ content }: SimplifiedViewProps) {
 
           <div className="sv-explanation">
             <div className="sv-explanation-label">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="12" y1="16" x2="12" y2="12"/>
-                <line x1="12" y1="8" x2="12.01" y2="8"/>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
               </svg>
-              הסבר פשוט
+              פיענוח ופישוט
             </div>
             <div className="sv-explanation-content">
-              <BidiText text={section.simplified_text} />
+              <BidiText text={section.simplified_text} isSimplified />
             </div>
           </div>
         </div>
@@ -205,27 +232,36 @@ export function SimplifiedView({ content }: SimplifiedViewProps) {
   );
 }
 
-function BidiText({ text }: { text: string }) {
+function BidiText({ text, isSimplified = false }: { text: string; isSimplified?: boolean }) {
   if (!text) return null;
+
+  // Split into lines first
   const lines = text.split('\n');
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+    <div className="bidi-text">
       {lines.map((line, i) => {
-        if (!line.trim() && line.length === 0) return <div key={i} style={{ height: '1rem' }} />;
-        const parts = line.split(/([a-zA-Z][a-zA-Z0-9]*)/g);
-        const firstStrong = line.match(/[a-zA-Zא-ת]/);
-        const isRtl = firstStrong ? /[א-ת]/.test(firstStrong[0]) : true;
+        if (!line.trim() && line.length === 0) return <div key={i} style={{ height: '0.75rem' }} />;
+        
+        // Strategy: Recognize English-heavy runs that include brackets and numbers
+        // Regex handles: English words, numbers, brackets, and common medical symbols
+        const parts = line.split(/([a-zA-Z0-9\(\)\[\]\.\:\-\+ ]*[a-zA-Z]+[a-zA-Z0-9\(\)\[\]\.\:\-\+ ]*)/g);
+        
         return (
-          <div
-            key={i}
-            dir={isRtl ? 'rtl' : 'ltr'}
-            style={{ textAlign: isRtl ? 'right' : 'left', lineHeight: 'inherit' }}
-          >
+          <div key={i} style={{ marginBottom: '0.2rem' }}>
             {parts.map((part, pI) => {
               if (!part) return null;
+              
+              // If the part contains any English letters, wrap it as an LTR run
               if (/[a-zA-Z]/.test(part)) {
-                return <bdi key={pI} dir="ltr">{'\u200E'}{part}{'\u200E'}</bdi>;
+                return (
+                  <span key={pI} className="bidi-ltr-run" dir="ltr">
+                    {'\u200E'}{part}{'\u200E'}
+                  </span>
+                );
               }
+              
+              // For Hebrew/numeric parts, keep them in the ambient RTL
               return <span key={pI}>{part}</span>;
             })}
           </div>

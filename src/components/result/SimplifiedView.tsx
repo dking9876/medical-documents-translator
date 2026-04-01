@@ -175,9 +175,9 @@ export function SimplifiedView({ content }: SimplifiedViewProps) {
         /* ── Original Text Block ── */
         .sv-original {
           padding: 1.25rem 1.25rem 1.25rem 1.5rem;
-          background: #f3f4f6;
+          background: #F8FAFC;
           border-bottom: 1px dashed var(--border-color);
-          border-right: 4px solid #94a3b8;
+          border-right: 4px solid #CBD5E1;
           position: relative;
         }
 
@@ -207,7 +207,7 @@ export function SimplifiedView({ content }: SimplifiedViewProps) {
           width: 20px;
           height: 20px;
           border-radius: 4px;
-          background: #e2e8f0;
+          background: #E2E8F0;
           color: #64748b;
           flex-shrink: 0;
         }
@@ -216,8 +216,7 @@ export function SimplifiedView({ content }: SimplifiedViewProps) {
           content: '';
           flex-grow: 1;
           height: 1px;
-          background: #cbd5e1;
-          opacity: 0.6;
+          background: #e2e8f0;
         }
 
         .sv-original-content {
@@ -227,7 +226,6 @@ export function SimplifiedView({ content }: SimplifiedViewProps) {
           font-family: inherit;
           word-break: break-word;
           overflow-wrap: anywhere;
-          opacity: 0.85;
         }
 
         @media (max-width: 640px) {
@@ -240,9 +238,9 @@ export function SimplifiedView({ content }: SimplifiedViewProps) {
         /* ── Explanation Block ── */
         .sv-explanation {
           padding: 1.5rem 1.25rem 1.5rem 1.5rem;
-          background: #f0fdf9;
+          background: #FFFFFF;
           border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-          border-right: 4px solid #10b981;
+          border-right: 4px solid var(--primary);
         }
 
         @media (max-width: 640px) {
@@ -259,7 +257,7 @@ export function SimplifiedView({ content }: SimplifiedViewProps) {
           gap: 0.4rem;
           font-size: 0.72rem;
           font-weight: 800;
-          color: #059669;
+          color: var(--primary);
           margin-bottom: 0.75rem;
           text-transform: uppercase;
           letter-spacing: 0.06em;
@@ -272,8 +270,8 @@ export function SimplifiedView({ content }: SimplifiedViewProps) {
           width: 22px;
           height: 22px;
           border-radius: 50%;
-          background: #d1fae5;
-          color: #059669;
+          background: var(--primary-light);
+          color: var(--primary);
           flex-shrink: 0;
         }
 

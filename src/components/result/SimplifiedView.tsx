@@ -174,22 +174,24 @@ export function SimplifiedView({ content }: SimplifiedViewProps) {
 
         /* ── Original Text Block ── */
         .sv-original {
-          padding: 1.25rem;
-          background: #fafafa;
+          padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+          background: #f3f4f6;
           border-bottom: 1px dashed var(--border-color);
+          border-right: 4px solid #94a3b8;
           position: relative;
         }
 
         @media (max-width: 640px) {
           .sv-original {
-            padding: 0.875rem;
+            padding: 0.875rem 0.875rem 0.875rem 1rem;
+            border-right-width: 3px;
           }
         }
 
         .sv-original-label {
-          font-size: 0.62rem;
+          font-size: 0.68rem;
           font-weight: 800;
-          color: var(--text-secondary);
+          color: #64748b;
           text-transform: uppercase;
           letter-spacing: 0.1em;
           margin-bottom: 0.6rem;
@@ -198,41 +200,56 @@ export function SimplifiedView({ content }: SimplifiedViewProps) {
           gap: 0.5rem;
         }
 
+        .sv-original-label-icon {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 20px;
+          height: 20px;
+          border-radius: 4px;
+          background: #e2e8f0;
+          color: #64748b;
+          flex-shrink: 0;
+        }
+
         .sv-original-label::after {
           content: '';
           flex-grow: 1;
           height: 1px;
-          background: var(--border-color);
-          opacity: 0.5;
+          background: #cbd5e1;
+          opacity: 0.6;
         }
 
         .sv-original-content {
-          font-size: 0.9rem;
+          font-size: 0.88rem;
           line-height: 1.75;
-          color: var(--text-secondary);
+          color: #475569;
           font-family: inherit;
           word-break: break-word;
           overflow-wrap: anywhere;
+          opacity: 0.85;
         }
 
         @media (max-width: 640px) {
           .sv-original-content {
-            font-size: 0.85rem;
+            font-size: 0.83rem;
             line-height: 1.65;
           }
         }
 
         /* ── Explanation Block ── */
         .sv-explanation {
-          padding: 1.25rem;
-          background: var(--surface);
+          padding: 1.5rem 1.25rem 1.5rem 1.5rem;
+          background: #f0fdf9;
           border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+          border-right: 4px solid #10b981;
         }
 
         @media (max-width: 640px) {
           .sv-explanation {
-            padding: 0.875rem;
+            padding: 1rem 0.875rem 1rem 1rem;
             border-radius: 0 0 var(--radius) var(--radius);
+            border-right-width: 3px;
           }
         }
 
@@ -240,17 +257,29 @@ export function SimplifiedView({ content }: SimplifiedViewProps) {
           display: flex;
           align-items: center;
           gap: 0.4rem;
-          font-size: 0.7rem;
-          font-weight: 700;
-          color: var(--accent);
-          margin-bottom: 0.6rem;
+          font-size: 0.72rem;
+          font-weight: 800;
+          color: #059669;
+          margin-bottom: 0.75rem;
           text-transform: uppercase;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.06em;
+        }
+
+        .sv-explanation-label-icon {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 22px;
+          height: 22px;
+          border-radius: 50%;
+          background: #d1fae5;
+          color: #059669;
+          flex-shrink: 0;
         }
 
         .sv-explanation-content {
           font-size: 1.05rem;
-          line-height: 1.8;
+          line-height: 1.85;
           color: var(--text-primary);
           font-weight: 450;
           word-break: break-word;
@@ -303,7 +332,15 @@ export function SimplifiedView({ content }: SimplifiedViewProps) {
           </div>
 
           <div className="sv-original">
-            <div className="sv-original-label">טקסט מקור</div>
+            <div className="sv-original-label">
+              <span className="sv-original-label-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                </svg>
+              </span>
+              טקסט מקור
+            </div>
             <div className="sv-original-content">
               <BidiText text={section.original_text} />
             </div>
@@ -311,9 +348,11 @@ export function SimplifiedView({ content }: SimplifiedViewProps) {
 
           <div className="sv-explanation">
             <div className="sv-explanation-label">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-              </svg>
+              <span className="sv-explanation-label-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>
+              </span>
               פיענוח ופישוט
             </div>
             <div className="sv-explanation-content">
